@@ -5,6 +5,26 @@ const GrayColor = '#D9D9D9';
 
 const char_name = 'Character Name';
 
+
+// HP&AC component
+const HP_AC = (
+  text : string,
+) => {
+  return (
+    <View style=
+      {{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '100%',
+        padding: 10,
+      }}
+    >
+      <Text>{text}</Text>
+    </View>
+  );
+};
+
+
 function App() {
   return (
     <SafeAreaView style={container_styles.container}>
@@ -12,23 +32,21 @@ function App() {
         <View style={char_image_styles.container}>
           <View style={char_image_styles.image_container}>
           </View>
-          <View style={char_image_styles.char_name_container}>
-          </View>
-          <View style={char_image_styles.class_image_container}>
-
+          <View style={char_image_styles.name_and_class_container}>
+            <View style={char_image_styles.char_name_container}>
+            </View>
+            <View style={char_image_styles.class_image_container}>
+            </View>
           </View>
         </View>
-        
       </View>
-
 
       <View style={skills_section_styles.parent_container}>
         <Text>Skills Section</Text>
       </View>
 
-
       <View style={info_section_styles.parent_container}>
-        <Text>Infomation Section</Text>
+        <Text>Information Section</Text>
       </View>
     </SafeAreaView>
   );
@@ -60,19 +78,27 @@ const char_image_styles = StyleSheet.create({
     overflow: 'hidden', // Ensures the image fits within the rounded corners
     position: 'relative',
   },
+  name_and_class_container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    position: 'absolute',
+    top: 0,
+    left: '50%',
+    marginLeft: -185, // Negative half of the width of char_name_container to center
+  },
   char_name_container: {
     backgroundColor: GrayColor, // Example background color with opacity
     borderRadius: 15,
     width: 370,
     height: 53,
-    position: 'absolute',
-    top: 0,
-    left: '50%',
-    marginLeft: -185, // Negative half of the width to center the container
     borderWidth: 1,
     padding: 0,
   },
   class_image_container: {
+    marginLeft: 15, // Space between char_name_container and class_image_container
+    height: 53,
+    width: 53,
+    borderWidth: 1,
   },
 });
 
@@ -102,48 +128,6 @@ const container_styles = StyleSheet.create({
     flexDirection: 'column',
     margin: 18,
   },
-  skills_section: {
-    flex: 127 / 1234,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#000', // Optional: to visualize the sections
-  },
-  info_section: {
-    flex: 589 / 1234,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#000', // Optional: to visualize the sections
-  },
-  char_image_container: {
-    margin: 30,
-    borderRadius: 15,
-    borderWidth: 4,
-    borderColor: 'red',
-    overflow: 'hidden', // Ensures the image fits within the rounded corners
-    position: 'relative',
-  },
-  char_image: {
-    flex: 1,
-    aspectRatio: 1792 / 1024,
-  },
-  char_name_container: {
-    width: 400,
-    position: 'absolute',
-    top: 0,
-    left: '50%',
-    transform: [{ translateX: -215 }],
-    backgroundColor: GrayColor, // Example background color with opacity
-    padding: 0,
-    borderRadius: 15,
-  },
-  char_name_header: {
-    fontSize: 40,
-    fontFamily: 'Arial',
-    textAlign: 'center',
-  },
 });
-
 
 export default App;
