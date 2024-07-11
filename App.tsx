@@ -11,14 +11,15 @@ const HP_AC = (
   text : string,
 ) => {
   return (
-    <View style=
-      {{
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        width: '100%',
-        padding: 10,
-      }}
-    >
+    <View 
+    style={{
+        height: 26,
+        backgroundColor: GrayColor, // Example background color with opacity
+        justifyContent: 'center',
+        borderRadius: 15,
+        alignItems: 'left',
+        paddingLeft: 10,
+      }}>
       <Text>{text}</Text>
     </View>
   );
@@ -31,6 +32,18 @@ function App() {
       <View style={char_image_styles.parent_container}>
         <View style={char_image_styles.container}>
           <View style={char_image_styles.image_container}>
+            <Image
+              source={require('./assets/char_image.png')}
+              style={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+              }}
+            />
+            <View style={char_image_styles.hp_and_ac_container}>
+              {HP_AC('HP: {character_hp}')}
+              {HP_AC('AC: {character_ac}')}
+            </View>
           </View>
           <View style={char_image_styles.name_and_class_container}>
             <View style={char_image_styles.char_name_container}>
@@ -99,6 +112,14 @@ const char_image_styles = StyleSheet.create({
     height: 53,
     width: 53,
     borderWidth: 1,
+  },
+  hp_and_ac_container: {
+    flexDirection: 'column',
+    gap: 5,
+    height: 57,
+    width: 150,
+    marginTop: 5,
+    marginLeft: 5,
   },
 });
 
