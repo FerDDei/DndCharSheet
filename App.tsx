@@ -1,8 +1,11 @@
 import React from 'react';
 import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { LinearGradient } from 'react-native-linear-gradient';
+import { useEffect, useState } from 'react';
 
 const GrayColor = '#D9D9D9';
+
+const backend_address = '192.168.1.180:5001';
 
 const char_name = 'Althea';
 const character_hp_max = 36;
@@ -15,10 +18,10 @@ const inventory = 'Sword\nShield\nPotion';
 const traits = 'Brave\nLoyal\nKind';
 const backstory = 'Althea was born in a small village in the mountains. She was raised by her mother and father, who were both skilled warriors. She learned to fight at a young age, and quickly became one of the best fighters in the village. When she was 18, her village was attacked by a band of orcs. Althea fought bravely, but was ultimately captured and taken prisoner. She managed to escape, and has been on the run ever since. She is now searching for a way to defeat the orcs and save her village.';
 
-const str = 14;
-const dex = 14;
+const str = 12;
+const dex = 20;
 const con = 18;
-const int = 8;
+const int = 20;
 const wis = 14;
 const cha = 14;
 
@@ -35,6 +38,7 @@ const con_saving_throw = 18;
 const int_saving_throw = 8;
 const wis_saving_throw = 14;
 const cha_saving_throw = 14;
+
 
 // HP&AC component
 const HP_AC = (
@@ -180,6 +184,18 @@ const component_styles = StyleSheet.create({
 });
 
 function App() {
+  const [members, setMembers] = useState([]);
+
+  useEffect(() => {
+    fetch(`http://${backend_address}/members`)
+      .then((response) => response.json())
+      .then((data) => {
+        setMembers(data.members);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
   return (
     <SafeAreaView style={container_styles.container}>
       <View style={char_image_styles.parent_container}>
